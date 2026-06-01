@@ -58,11 +58,9 @@
             <h1 class="question">Миледи, окажете ли вы мне честь провести этот вечер в моём обществе? 🌹</h1>
             <!-- Используем стабильную милую гифку -->
             <img class="gif" src="https://i.postimg.cc/W35jqy6J/92e6344646d512551822f077f2acedaa.gif"
-            <div class="btn-group" style="display: flex; justify-content: center; gap: 20px; min-height: 60px; position: relative;">
-                <button class="yes-btn" style="position: relative; z-index: 5;">Да ✨</button>
-                <div style="width: 100px; height: 50px; display: inline-block; position: relative;">
-                    <button class="no-btn" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;">Нет 🙅‍♂️</button>
-                </div>
+            <div class="btn-group" style="display: flex; justify-content: center; gap: 20px; min-height: 50px; align-items: center;">
+                <button class="yes-btn">Да ✨</button>
+                <button class="no-btn">Нет 🙅‍♂️</button>
             </div>
         <!-- Экран с анкетой -->
         <div id="success-message">
@@ -110,7 +108,14 @@
         });
 
         // УБЕГАНИЕ КНОПКИ "НЕТ"
+        // УБЕГАНИЕ КНОПКИ "НЕТ"
         function moveButton() {
+            if (!noBtn) return;
+            
+            // Как только кнопка начинает убегать, мы отвязываем её от сетки сайта
+            noBtn.style.position = "fixed";
+            noBtn.style.zIndex = "9999"; 
+
             const noRect = noBtn.getBoundingClientRect();
             // Кнопка бегает внутри окна браузера
             const maxX = window.innerWidth - noRect.width - 20;
@@ -119,16 +124,17 @@
             const randomX = Math.max(10, Math.floor(Math.random() * maxX));
             const randomY = Math.max(10, Math.floor(Math.random() * maxY));
 
-            noBtn.style.position = "fixed";
             noBtn.style.left = randomX + "px";
             noBtn.style.top = randomY + "px";
         }
 
-        noBtn.addEventListener("mouseover", moveButton);
-        noBtn.addEventListener("touchstart", (e) => {
-            e.preventDefault(); // Предотвращаем случайное нажатие на смартфонах
-            moveButton();
-        });
+        if (noBtn) {
+            noBtn.addEventListener("mouseover", moveButton);
+            noBtn.addEventListener("touchstart", (e) => {
+                e.preventDefault(); // Предотвращаем случайное нажатие на смартфонах
+                moveButton();
+            });
+        }
     </script>
 </body>
 </html>
