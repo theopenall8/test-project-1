@@ -58,6 +58,53 @@
 </div>
     </div>
     <script src="script.js"></script>
-    
+    <script>
+    // Ждем полной загрузки страницы
+    window.addEventListener('DOMContentLoaded', () => {
+        const question = document.querySelector(".question");
+        const gif = document.querySelector(".gif");
+        const yesBtn = document.querySelector(".yes-btn");
+        const noBtn = document.querySelector(".no-btn");
+
+        // 1. КЛИК НА "ДА"
+        if (yesBtn) {
+            yesBtn.addEventListener("click", () => {
+                if (question) question.style.display = "none";
+                if (gif) gif.style.display = "none";
+                const btnGroup = document.querySelector(".btn-group");
+                if (btnGroup) btnGroup.style.display = "none";
+
+                const successMessage = document.getElementById("success-message");
+                if (successMessage) {
+                    successMessage.style.setProperty("display", "block", "important");
+                }
+            });
+        }
+
+        // 2. УБЕГАНИЕ КНОПКИ "НЕТ"
+        function moveNoButton() {
+            if (!noBtn) return;
+            const noBtnRect = noBtn.getBoundingClientRect();
+            const maxX = window.innerWidth - noBtnRect.width;
+            const maxY = window.innerHeight - noBtnRect.height;
+
+            const randomX = Math.floor(Math.random() * Math.max(maxX, 50));
+            const randomY = Math.floor(Math.random() * Math.max(maxY, 50));
+
+            noBtn.style.position = "fixed"; // fixed работает надежнее в контейнерах
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+            noBtn.style.zIndex = "9999"; // выводим кнопку на самый передний план
+        }
+
+        if (noBtn) {
+            noBtn.addEventListener("mouseover", moveNoButton);
+            noBtn.addEventListener("touchstart", (e) => {
+                e.preventDefault(); // отменяет стандартный клик на телефоне
+                moveNoButton();
+            });
+        }
+    });
+</script>
   </body>
 </html>
