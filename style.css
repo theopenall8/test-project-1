@@ -56,5 +56,42 @@ button:nth-child(1) {
 button:nth-child(2) {
     margin-right: -200px;
     background: white;
+    #date-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: left;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+.form-group input, .form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+.submit-btn {
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.submit-btn:hover {
+    background-color: #ff758f;
+}
     color: #e94d58;
 }
