@@ -10,7 +10,7 @@ const handleYesClick = () => {
 
     const successMessage = document.getElementById("success-message");
     if (successMessage) {
-        successMessage.style.display = "block";
+        successMessage.style.setProperty("display", "block", "important");
     }
 };
   // Define predefined romantic date ideas
