@@ -4,15 +4,15 @@ const gif = qs(".gif");
 const [yesBtn, noBtn] = [".yes-btn", ".no-btn"].map(qs);
 
 const handleYesClick = () => {
-  question.innerHTML = "Yeahhhhhhhhhhh! See you tomorrow!!";
-  gif.src = "https://media.giphy.com/media/UMon0fuimoAN9ueUNP/giphy.gif";
+    question.style.display = "none";
+    gif.style.display = "none";
+    qs(".btn-group").style.display = "none";
 
-  // Remove the 'mouseover' event listener from noBtn
-  noBtn.removeEventListener("mouseover", handleNoMouseOver);
-
-  // Remove the noBtn from the DOM
-  noBtn.remove();
-
+    const successMessage = document.getElementById("success-message");
+    if (successMessage) {
+        successMessage.style.display = "block";
+    }
+};
   // Define predefined romantic date ideas
   const dateIdeas = [
     "Cook a romantic dinner together",
