@@ -9,33 +9,27 @@
         body {
             background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
             display: flex;
-            align-content: center; justify-content: center; align-items: center;
+            justify-content: center; align-items: center;
             min-height: 100vh; text-align: center; padding: 20px;
         }
         .container {
             background: rgba(255, 255, 255, 0.9);
             padding: 40px 30px; border-radius: 24px;
             box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
-            max-width: 450px; width: 100%; transition: all 0.5s ease;
+            max-width: 450px; width: 100%;
         }
         h1, h2 { color: #ff4d6d; font-size: 26px; margin-bottom: 25px; line-height: 1.4; }
-        .gif { width: 100%; max-width: 230px; height: auto; border-radius: 15px; margin-bottom: 25px; }
-        .btn-group { 
-    display: flex; 
-    justify-content: center; 
-    gap: 20px; 
-    position: relative; 
-    min-height: 60px; 
-    align-items: center; 
-    flex-direction: row; /* Принудительно выстраивает кнопки в ряд */
-}
+        .gif { width: 100%; max-width: 230px; height: auto; border-radius: 15px; margin: 0 auto 25px auto; display: block; }
+        
+        /* Кнопки */
+        .btn-group { display: flex; justify-content: center; gap: 20px; min-height: 50px; align-items: center; }
         button, .submit-btn {
             padding: 14px 28px; font-size: 18px; font-weight: bold;
             border: none; border-radius: 50px; cursor: pointer; transition: transform 0.2s, background-color 0.3s;
         }
         .yes-btn { background-color: #ff4d6d; color: white; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); }
         .yes-btn:hover { background-color: #ff758f; transform: scale(1.05); }
-        .no-btn { background-color: #f0f0f0; color: #555; position: relative; z-index: 10; }
+        .no-btn { background-color: #f0f0f0; color: #555; transition: left 0.1s ease, top 0.1s ease; }
         
         /* Стили формы */
         #success-message { display: none; }
@@ -56,18 +50,19 @@
         <!-- Главный экран -->
         <div id="quiz-screen">
             <h1 class="question">Миледи, окажете ли вы мне честь провести этот вечер в моём обществе? 🌹</h1>
-            <!-- Используем стабильную милую гифку -->
-            <img class="gif" src="https://i.postimg.cc/W35jqy6J/92e6344646d512551822f077f2acedaa.gif" alt="Романтичная гифка" style="margin: 0 auto 25px auto; display: block;">
-            <div class="btn-group" style="display: flex; justify-content: center; gap: 20px; min-height: 50px; align-items: center;">
+            <img class="gif" src="https://i.postimg.cc/W35jqy6J/92e6344646d512551822f077f2acedaa.gif" alt="Романтичная гифка">
+            <div class="btn-group">
                 <button class="yes-btn">Да ✨</button>
                 <button class="no-btn">Нет 🙅‍♂️</button>
             </div>
+        </div>
+
         <!-- Экран с анкетой -->
-        <div id="success-message" style="display: none; margin-top: 20px;">
+        <div id="success-message">
             <h2>Прекрасный выбор, Миледи! 💫</h2>
             <p style="color: #666; font-size: 15px; margin-bottom: 20px;">Укажите, когда и где вам будет удобнее встретиться:</p>
             
-            <form action="https://api.web3forms.com/submit" method="POST">
+           form action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="e1e5fca8-e2ea-498a-8238-8062fb4fda76">
 
                 <div class="form-group">
@@ -79,6 +74,7 @@
                     <label>Выберите время:</label>
                     <input type="time" name="Время свидания" required>
                 </div>
+
                 <div class="form-group">
                     <label>Где бы вы хотели провести время?</label>
                     <select name="Место встречи" required>
@@ -97,50 +93,45 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-        const yesBtn = document.querySelector(".yes-btn");
-        const noBtn = document.querySelector(".no-btn");
+            const quizScreen = document.getElementById("quiz-screen");
+            const successMessage = document.getElementById("success-message");
+            const yesBtn = document.querySelector(".yes-btn");
+            const noBtn = document.querySelector(".no-btn");
 
-        // 1. КЛИК НА "ДА" — Показываем анкету Web3Forms
-        if (yesBtn) {
-            yesBtn.addEventListener("click", () => {
-                const quizScreen = document.getElementById("quiz-screen");
-                if (quizScreen) {
-                    quizScreen.style.setProperty("display", "none", "important");
-                }
+            // 1. КЛИК НА "ДА"
+            if (yesBtn) {
+                yesBtn.addEventListener("click", () => {
+                    quizScreen.style.display = "none";
+                    successMessage.style.display = "block";
+                });
+            }
 
-                const successMessage = document.getElementById("success-message");
-                if (successMessage) {
-                    successMessage.style.setProperty("display", "block", "important");
-                }
-            });
-        }
+            // 2. УБЕГАНИЕ КНОПКИ "НЕТ"
+            function moveButton() {
+                if (!noBtn) return;
+                
+                noBtn.style.position = "fixed";
+                noBtn.style.zIndex = "9999"; 
 
-        // 2. УБЕГАНИЕ КНОПКИ "НЕТ"
-        function moveButton() {
-            if (!noBtn) return;
-            
-            noBtn.style.position = "fixed";
-            noBtn.style.zIndex = "9999"; 
+                const noRect = noBtn.getBoundingClientRect();
+                const maxX = window.innerWidth - noRect.width - 20;
+                const maxY = window.innerHeight - noRect.height - 20;
 
-            const noRect = noBtn.getBoundingClientRect();
-            const maxX = window.innerWidth - noRect.width - 20;
-            const maxY = window.innerHeight - noRect.height - 20;
+                const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+                const randomY = Math.max(10, Math.floor(Math.random() * maxY));
 
-            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+                noBtn.style.left = randomX + "px";
+                noBtn.style.top = randomY + "px";
+            }
 
-            noBtn.style.left = randomX + "px";
-            noBtn.style.top = randomY + "px";
-        }
-
-        if (noBtn) {
-            noBtn.addEventListener("mouseover", moveButton);
-            noBtn.addEventListener("touchstart", (e) => {
-                e.preventDefault();
-                moveButton();
-            });
-        }
-    });
+            if (noBtn) {
+                noBtn.addEventListener("mouseover", moveButton);
+                noBtn.addEventListener("touchstart", (e) => {
+                    e.preventDefault(); // Защита от ложного клика на мобилках
+                    moveButton();
+                });
+            }
+        });
     </script>
 </body>
 </html>
