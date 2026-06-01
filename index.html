@@ -49,7 +49,7 @@
         <div id="quiz-screen">
             <h1 class="question">Миледи, окажете ли вы мне честь провести этот вечер в моём обществе? 🌹</h1>
             <!-- Используем стабильную милую гифку -->
-            <img class="gif" src="https://giphy.com" alt="gif">
+            <<img class="gif" src="https://postimg.co" alt="Романтичная гифка">
             <div class="btn-group">
                 <button class="yes-btn">Да ✨</button>
                 <button class="no-btn">Нет 🙅‍♂️</button>
@@ -61,9 +61,13 @@
             <h2>Прекрасный выбор, Миледи! 💫</h2>
             <p style="color: #666; font-size: 15px; margin-bottom: 20px;">Укажите, когда и где вам будет удобнее встретиться:</p>
             
-            <form action="https://web3forms.com" method="POST">
-                <!-- ВСТАВЬ СВОЙ КЛЮЧ МЕЖДУ КАВЫЧКАМИ В value="..." -->
-                <input type="hidden" name="access_key" value="e1e5fca8-e2ea-498a-8238-8062fb4fda76">
+            <form action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="e1e5fca8-e2ea-498a-8238-8062fb4fda76">
+  <input type="text" name="name" required>
+  <input type="email" name="email" required>
+  <textarea name="message" required></textarea>
+  <button type="submit">Submit Form</button>
+</form>
 
                 <div class="form-group">
                     <label>Выберите день:</label>
