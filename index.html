@@ -1,110 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ты пойдёешь со мной свидание? 🥹</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="wrapper">
-      <h2 class="question">Миледи, окажете ли вы мне честь провести вечер в моём обществе? </h2>
-      <img
-        class="gif"
-        alt="gif"
-        src="https://media.giphy.com/media/FTGah7Mx3ss04PcasF/giphy.gif"
-      />
-      <div class="btn-group">
-        <button class="yes-btn">Да🫶</button>
-        <button class="no-btn">Нет🙅‍♀️</button>
-      <div id="success-message" style="display: none !important; margin-top: 20px; text-align: center;">
-    <h2>Прекрасный выбор, Миледи! 🌹</h2>
-    <p>Пожалуйста, укажите, когда и где вам будет удобнее встретиться:</p>
-    <form action="https://web3forms.com" method="POST" id="date-form">
-        <input type="hidden" name="access_key" value="e1e5fca8-e2ea-498a-8238-8062fb4fda76">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приглашение для Миледи 🌹</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Georgia', serif; }
+        body {
+            background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
+            display: flex;
+            align-content: center; justify-content: center; align-items: center;
+            min-height: 100vh; text-align: center; padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px; border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            max-width: 450px; width: 100%; transition: all 0.5s ease;
+        }
+        h1, h2 { color: #ff4d6d; font-size: 26px; margin-bottom: 25px; line-height: 1.4; }
+        .gif { width: 100%; max-width: 230px; height: auto; border-radius: 15px; margin-bottom: 25px; }
+        .btn-group { display: flex; justify-content: center; gap: 20px; position: relative; min-height: 60px; align-items: center; }
+        button, .submit-btn {
+            padding: 14px 28px; font-size: 18px; font-weight: bold;
+            border: none; border-radius: 50px; cursor: pointer; transition: transform 0.2s, background-color 0.3s;
+        }
+        .yes-btn { background-color: #ff4d6d; color: white; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); }
+        .yes-btn:hover { background-color: #ff758f; transform: scale(1.05); }
+        .no-btn { background-color: #f0f0f0; color: #555; position: relative; z-index: 10; }
+        
+        /* Стили формы */
+        #success-message { display: none; }
+        .form-group { text-align: left; margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 15px; color: #555; margin-bottom: 6px; font-style: italic; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 12px; border: 1.5px solid #ffccd5; border-radius: 12px;
+            font-size: 16px; outline: none; background: #fffdfd;
+        }
+        .form-group input:focus, .form-group select:focus { border-color: #ff4d6d; }
+        .submit-btn { background-color: #ff4d6d; color: white; width: 100%; margin-top: 10px; box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3); }
+        .submit-btn:hover { background-color: #ff758f; }
+    </style>
+</head>
+<body>
 
-        <!-- Выбор Даты -->
-        <div class="form-group">
-            <label for="date">Выберите день:</label>
-            <input type="date" id="date" name="Дата свидания" required>
+    <div class="container">
+        <!-- Главный экран -->
+        <div id="quiz-screen">
+            <h1 class="question">Миледи, окажете ли вы мне честь провести этот вечер в моём обществе? 🌹</h1>
+            <!-- Используем стабильную милую гифку -->
+            <img class="gif" src="https://giphy.com" alt="gif">
+            <div class="btn-group">
+                <button class="yes-btn">Да ✨</button>
+                <button class="no-btn">Нет 🙅‍♂️</button>
+            </div>
         </div>
 
-        <!-- Выбор Времени -->
-        <div class="form-group">
-            <label for="time">Выберите время:</label>
-            <input type="time" id="time" name="Время свидания" required>
-        </div>
+        <!-- Экран с анкетой -->
+        <div id="success-message">
+            <h2>Прекрасный выбор, Миледи! 💫</h2>
+            <p style="color: #666; font-size: 15px; margin-bottom: 20px;">Укажите, когда и где вам будет удобнее встретиться:</p>
+            
+            <form action="https://web3forms.com" method="POST">
+                <!-- ВСТАВЬ СВОЙ КЛЮЧ МЕЖДУ КАВЫЧКАМИ В value="..." -->
+                <input type="hidden" name="access_key" value="e1e5fca8-e2ea-498a-8238-8062fb4fda76">
 
-        <!-- Выбор Места -->
-        <div class="form-group">
-            <label for="place">Где бы вы хотели провести время?</label>
-            <select id="place" name="Место встречи" required>
-                <option value="" disabled selected>-- Выберите вариант --</option>
-                <option value="Уютная кофейня с лучшими десертами">Уютная кофейня с десертами</option>
-                <option value="Прогулка по крышам или парку">Романтическая прогулка</option>
-                <option value="Изысканный ужин в ресторане">Ужин в ресторане</option>
-                <option value="Секретное место (сюрприз от меня)">Секретное место (Сюрприз)</option>
-            </select>
+                <div class="form-group">
+                    <label>Выберите день:</label>
+                    <input type="date" name="Дата свидания" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Выберите время:</label>
+                    <input type="time" name="Время свидания" required>
+                </div>
+                <div class="form-group">
+                    <label>Где бы вы хотели провести время?</label>
+                    <select name="Место встречи" required>
+                        <option value="" disabled selected>-- Нажмите, чтобы выбрать --</option>
+                        <option value="Уютная кофейня с лучшими десертами">Уютная кофейня с десертами ☕️</option>
+                        <option value="Романтическая прогулка в парке">Романтическая прогулка 🌳</option>
+                        <option value="Изысканный ужин в ресторане">Ужин в ресторане 🍽️</option>
+                        <option value="Секретное место (сюрприз от меня)">Секретное место (Сюрприз) 🤫</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Отправить Милорду ✉️</button>
+            </form>
         </div>
-        <!-- Кнопка отправки -->
-        <button type="submit" class="submit-btn">Отправить ✉️</button>
-    </form>
-</div>
     </div>
-    <script src="script.js"></script>
+
     <script>
-    // Ждем полной загрузки страницы
-    window.addEventListener('DOMContentLoaded', () => {
-        const question = document.querySelector(".question");
-        const gif = document.querySelector(".gif");
+        const quizScreen = document.getElementById("quiz-screen");
+        const successMessage = document.getElementById("success-message");
         const yesBtn = document.querySelector(".yes-btn");
         const noBtn = document.querySelector(".no-btn");
 
-        // 1. КЛИК НА "ДА"
-        if (yesBtn) {
-            yesBtn.addEventListener("click", () => {
-                if (question) question.style.display = "none";
-                if (gif) gif.style.display = "none";
-                const btnGroup = document.querySelector(".btn-group");
-                if (btnGroup) btnGroup.style.display = "none";
+        // КЛИК "ДА" — Всё исчезает, появляется форма
+        yesBtn.addEventListener("click", () => {
+            quizScreen.style.display = "none";
+            successMessage.style.display = "block";
+        });
 
-                const successMessage = document.getElementById("success-message");
-                if (successMessage) {
-                    successMessage.style.setProperty("display", "block", "important");
-                }
-            });
-        }
+        // УБЕГАНИЕ КНОПКИ "НЕТ"
+        function moveButton() {
+            const noRect = noBtn.getBoundingClientRect();
+            // Кнопка бегает внутри окна браузера
+            const maxX = window.innerWidth - noRect.width - 20;
+            const maxY = window.innerHeight - noRect.height - 20;
 
-        // 2. УБЕГАНИЕ КНОПКИ "НЕТ"
-        function moveNoButton() {
-            if (!noBtn) return;
-            const noBtnRect = noBtn.getBoundingClientRect();
-            const maxX = window.innerWidth - noBtnRect.width;
-            const maxY = window.innerHeight - noBtnRect.height;
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
 
-            const randomX = Math.floor(Math.random() * Math.max(maxX, 50));
-            const randomY = Math.floor(Math.random() * Math.max(maxY, 50));
-
-            noBtn.style.position = "fixed"; // fixed работает надежнее в контейнерах
+            noBtn.style.position = "fixed";
             noBtn.style.left = randomX + "px";
             noBtn.style.top = randomY + "px";
-            noBtn.style.zIndex = "9999"; // выводим кнопку на самый передний план
         }
 
-        if (noBtn) {
-            noBtn.addEventListener("mouseover", moveNoButton);
-            noBtn.addEventListener("touchstart", (e) => {
-                e.preventDefault(); // отменяет стандартный клик на телефоне
-                moveNoButton();
-            });
-        }
-    });
-</script>
-  </body>
+        noBtn.addEventListener("mouseover", moveButton);
+        noBtn.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Предотвращаем случайное нажатие на смартфонах
+            moveButton();
+        });
+    </script>
+</body>
 </html>
