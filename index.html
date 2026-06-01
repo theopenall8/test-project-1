@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Will you go out with me? 🥹</title>
+    <title>Ты пойдёешь со мной свидание? 🥹</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,16 +14,48 @@
   </head>
   <body>
     <div class="wrapper">
-      <h2 class="question">Will you go out with me?</h2>
+      <h2 class="question">Миледи, окажете ли вы мне честь провести вечер в моём обществе? </h2>
       <img
         class="gif"
         alt="gif"
         src="https://media.giphy.com/media/FTGah7Mx3ss04PcasF/giphy.gif"
       />
       <div class="btn-group">
-        <button class="yes-btn">Yes</button>
-        <button class="no-btn">No</button>
-      </div>
+        <button class="yes-btn">Да🫶</button>
+        <button class="no-btn">Нет🙅‍♀️</button>
+      <div id="success-message">
+    <h2>Прекрасный выбор, Миледи! 🌹</h2>
+    <p>Пожалуйста, укажите, когда и где вам будет удобнее встретиться:</p>
+    <form action="https://web3forms.com" method="POST" id="date-form">
+        <input type="hidden" name="access_key" value="e1e5fca8-e2ea-498a-8238-8062fb4fda76">
+
+        <!-- Выбор Даты -->
+        <div class="form-group">
+            <label for="date">Выберите день:</label>
+            <input type="date" id="date" name="Дата свидания" required>
+        </div>
+
+        <!-- Выбор Времени -->
+        <div class="form-group">
+            <label for="time">Выберите время:</label>
+            <input type="time" id="time" name="Время свидания" required>
+        </div>
+
+        <!-- Выбор Места -->
+        <div class="form-group">
+            <label for="place">Где бы вы хотели провести время?</label>
+            <select id="place" name="Место встречи" required>
+                <option value="" disabled selected>-- Выберите вариант --</option>
+                <option value="Уютная кофейня с лучшими десертами">Уютная кофейня с десертами</option>
+                <option value="Прогулка по крышам или парку">Романтическая прогулка</option>
+                <option value="Изысканный ужин в ресторане">Ужин в ресторане</option>
+                <option value="Секретное место (сюрприз от меня)">Секретное место (Сюрприз)</option>
+            </select>
+        </div>
+        <!-- Кнопка отправки -->
+        <button type="submit" class="submit-btn">Отправить ✉️</button>
+    </form>
+</div>
     </div>
     <script src="script.js"></script>
     
