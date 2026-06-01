@@ -96,28 +96,33 @@
     </div>
 
     <script>
-        const quizScreen = document.getElementById("quiz-screen");
-        const successMessage = document.getElementById("success-message");
+        window.addEventListener('DOMContentLoaded', () => {
         const yesBtn = document.querySelector(".yes-btn");
         const noBtn = document.querySelector(".no-btn");
 
-        // КЛИК "ДА" — Всё исчезает, появляется форма
-        yesBtn.addEventListener("click", () => {
-            quizScreen.style.display = "none";
-            successMessage.style.display = "block";
-        });
+        // 1. КЛИК НА "ДА" — Показываем анкету Web3Forms
+        if (yesBtn) {
+            yesBtn.addEventListener("click", () => {
+                const quizScreen = document.getElementById("quiz-screen");
+                if (quizScreen) {
+                    quizScreen.style.setProperty("display", "none", "important");
+                }
 
-        // УБЕГАНИЕ КНОПКИ "НЕТ"
-        // УБЕГАНИЕ КНОПКИ "НЕТ"
+                const successMessage = document.getElementById("success-message");
+                if (successMessage) {
+                    successMessage.style.setProperty("display", "block", "important");
+                }
+            });
+        }
+
+        // 2. УБЕГАНИЕ КНОПКИ "НЕТ"
         function moveButton() {
             if (!noBtn) return;
             
-            // Как только кнопка начинает убегать, мы отвязываем её от сетки сайта
             noBtn.style.position = "fixed";
             noBtn.style.zIndex = "9999"; 
 
             const noRect = noBtn.getBoundingClientRect();
-            // Кнопка бегает внутри окна браузера
             const maxX = window.innerWidth - noRect.width - 20;
             const maxY = window.innerHeight - noRect.height - 20;
 
@@ -131,10 +136,11 @@
         if (noBtn) {
             noBtn.addEventListener("mouseover", moveButton);
             noBtn.addEventListener("touchstart", (e) => {
-                e.preventDefault(); // Предотвращаем случайное нажатие на смартфонах
+                e.preventDefault();
                 moveButton();
             });
         }
+    });
     </script>
 </body>
 </html>
